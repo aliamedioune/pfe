@@ -1,0 +1,128 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+import TableRow from './TableRow';
+
+export default class IndexLaureat extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { laureats: [] };
+  }
+  componentDidMount() {
+
+    axios.get('http://localhost/api/laureat/read.php', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => {
+        this.setState({ laureats: response.data.data });
+      }, console.log(this.state.laureats))
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+ 
+  
+  tabRow() {
+    return this.state.laureats.map(function (object, i) {
+      return <TableRow obj={object} key={i} />;
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h3 align="center">laureats List</h3>
+        <table className="table table-striped" style={{ marginTop: 20 }}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>CNE</th>
+              <th>Annee du Diplome</th>
+              <th>Diplome</th>
+              <th>LinkedIn</th>
+              <th>Gender</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+              <th colSpan="2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.tabRow()}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+class TableRow extends Component {
+  constructor(props) {
+    super(props);
+    this.delete = this.delete.bind(this);
+  }
+  delete() {
+    axios.get('http://localhost/api/laureat/delete.php?id=' + this.props.obj.id)
+      .then(console.log('Deleted'))
+      .catch(err => console.log(err));
+    window.location.reload();
+  }
+
+  render() {
+    return (
+
+      <tr>
+        <td>
+          {this.props.obj.id}
+        </td>
+        <td>
+          {this.props.obj.first_name}
+        </td>
+        <td>
+          {this.props.obj.last_name}
+        </td>
+        <td>
+          {this.props.obj.email}
+        </td>
+
+        <td>
+          {this.props.obj.cne}
+        </td>
+        <td>
+          {this.props.obj.anneedip}
+        </td>
+        <td>
+          {this.props.obj.diplome}
+        </td>
+        <td>
+          {this.props.obj.gender}
+        </td>
+        <td>
+          {this.props.obj.linkedin}
+        </td>
+        <td>
+          {this.props.obj.created_at}
+        </td>
+        <td>
+          {this.props.obj.updated_at}
+        </td>
+        <td>
+          <Link to={"/admin/laureat/edit/" + this.props.obj.id} className="btn btn-primary">Edit</Link>
+        </td>
+        <td>
+          <button onClick={this.delete} className="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    );
+  }
+}
+
+export default TableRow;

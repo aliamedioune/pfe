@@ -1,0 +1,298 @@
+home.js )))
+
+
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import { Redirect } from 'react-router-dom';
+import {  FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
+import "./Home.css";
+import { Grid, Cell  } from 'react-mdl';
+import { Link } from 'react-router-dom';
+class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { activeTab: 0 };
+    }
+    handleClick1 = () => {
+        window.location.assign("./Ajoute_etu");
+      }
+      handleClick2 = () => {
+        window.location.assign("./addabsence");
+      }
+    
+    toggleCategories() {
+
+        if (this.state.activeTab === 0) {
+            return (
+                <div className="container">
+                <p> </p>
+
+                    <Button onClick={this.handleClick1} class="btn btn-primary" variant="primary" size="lg"   block>
+                      Ajouter Un Etudiant  
+                   
+                      </Button>
+                      <p> </p>
+                    <Button onClick={this.handleClick2} variant="success" size="lg" block>
+                      Ajouter Absence 
+                    </Button>
+                    <p> </p>
+                    <Button variant="info" size="lg" block>
+                       Liste Des Absence  
+                    </Button>
+      
+}
+                </div>
+
+
+            )
+        }
+
+    }
+
+
+    render() {
+        return (
+            <div>
+                <p>{}</p>
+               
+                <Grid>
+                    <Cell col={12}>
+                        <div className="wrapper">{this.toggleCategories()}</div>
+                    </Cell>
+                </Grid>
+
+
+            </div>
+        )
+    }
+}
+
+
+export default Home;
+
+
+
+
+
+
+
+
+
+
+èèèèè classeç_kk
+
+
+
+import React, { Component } from 'react';
+import { Grid, Cell, } from 'react-mdl';
+import settings from '../settings'
+import axios from 'axios'
+import  './Addab.css'
+
+
+
+
+
+
+
+class addabsence extends Component {
+    handleClick = () => {
+        window.location.assign("./etudiant");
+      }
+  render() {
+    return (
+     <div>
+     <div className="dropdown">
+        <button class="dropbtn">Première année</button>
+        <div className="dropdown-content">
+          <a href="#" onClick={this.handleClick}>GI1</a>
+          <a href="#">ER1</a>
+          <a href="#">GODT1</a>
+          <a href="#">TM1</a>
+        </div>
+      </div>
+       <div className="dropdown1">
+       <button class="dropbtn1">Deuxième année</button>
+       <div className="dropdown-content1">
+         <a href="#">GI2</a>
+         <a href="#">ER2</a>
+         <a href="#">GODT2</a>
+         <a href="#">TM2</a>
+       </div>
+     </div>
+     <div className="dropdown2">
+     <button class="dropbtn2">Deuxième année</button>
+     <div className="dropdown-content2">
+       <a href="#">ISIL</a>
+       <a href="#">ERD</a>
+       <a href="#">MBF</a>
+       <a href="#">TOURISME</a>
+     </div>
+   </div>
+   
+   </div>
+    )
+  }
+}
+export default addabsence ;
+
+
+addab.css
+
+
+
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+.dropbtn1 {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown1 {
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content1 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content1 a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown1:hover .dropdown-content1 {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown1:hover .dropbtn1 {
+  background-color: #3e8e41;
+}
+.dropbtn2 {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown2 {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content2 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content2 a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown2:hover .dropdown-content2 {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown2:hover .dropbtn2 {
+  background-color: #3e8e41;
+}
+
+
+
+
+
+
+
+
+
